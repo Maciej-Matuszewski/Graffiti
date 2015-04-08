@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "graffitiTabBarController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -16,7 +18,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [[graffitiTabBarController alloc] init];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
