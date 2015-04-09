@@ -11,6 +11,7 @@
 		140A3A3F1AD4C19D00031129 /* graffitiCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140A3A3E1AD4C19D00031129 /* graffitiCameraViewController.m */; };
 		140A3A421AD4CA2D00031129 /* graffitiMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140A3A411AD4CA2D00031129 /* graffitiMapViewController.m */; };
 		140A3A451AD4CB1400031129 /* graffitiSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140A3A441AD4CB1400031129 /* graffitiSettingsViewController.m */; };
+		14342EF81AD6BD0C00853C7C /* graffitiPaintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14342EF71AD6BD0C00853C7C /* graffitiPaintViewController.m */; };
 		146AA38C1AD4B98800171E16 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 146AA38B1AD4B98800171E16 /* main.m */; };
 		146AA38F1AD4B98800171E16 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146AA38E1AD4B98800171E16 /* AppDelegate.m */; };
 		146AA3971AD4B98800171E16 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146AA3961AD4B98800171E16 /* Images.xcassets */; };
@@ -39,6 +40,8 @@
 		140A3A411AD4CA2D00031129 /* graffitiMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = graffitiMapViewController.m; sourceTree = "<group>"; };
 		140A3A431AD4CB1400031129 /* graffitiSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graffitiSettingsViewController.h; sourceTree = "<group>"; };
 		140A3A441AD4CB1400031129 /* graffitiSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = graffitiSettingsViewController.m; sourceTree = "<group>"; };
+		14342EF61AD6BD0C00853C7C /* graffitiPaintViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graffitiPaintViewController.h; sourceTree = "<group>"; };
+		14342EF71AD6BD0C00853C7C /* graffitiPaintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = graffitiPaintViewController.m; sourceTree = "<group>"; };
 		146AA3861AD4B98800171E16 /* Graffiti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graffiti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		146AA38A1AD4B98800171E16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		146AA38B1AD4B98800171E16 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 				140A3A3E1AD4C19D00031129 /* graffitiCameraViewController.m */,
 				140A3A431AD4CB1400031129 /* graffitiSettingsViewController.h */,
 				140A3A441AD4CB1400031129 /* graffitiSettingsViewController.m */,
+				14342EF61AD6BD0C00853C7C /* graffitiPaintViewController.h */,
+				14342EF71AD6BD0C00853C7C /* graffitiPaintViewController.m */,
 			);
 			path = Graffiti;
 			sourceTree = "<group>";
@@ -290,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14342EF81AD6BD0C00853C7C /* graffitiPaintViewController.m in Sources */,
 				140A3A451AD4CB1400031129 /* graffitiSettingsViewController.m in Sources */,
 				146AA38F1AD4B98800171E16 /* AppDelegate.m in Sources */,
 				140A3A3F1AD4C19D00031129 /* graffitiCameraViewController.m in Sources */,
