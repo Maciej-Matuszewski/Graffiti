@@ -7,6 +7,7 @@
 //
 
 #import "graffitiSettingsViewController.h"
+#import "Constants.h"
 
 @interface graffitiSettingsViewController ()
 
@@ -16,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor:mainBackgroundColor];
 }
 
 - (void)didReceiveMemoryWarning {

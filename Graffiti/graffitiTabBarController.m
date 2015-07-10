@@ -9,7 +9,11 @@
 #import "graffitiTabBarController.h"
 #import "graffitiCameraViewController.h"
 #import "graffitiMapViewController.h"
+#import "graffitiFeedTableViewController.h"
 #import "graffitiSettingsViewController.h"
+#import "Constants.h"
+
+#import <CRGradientNavigationBar/CRGradientNavigationBar.h>
 
 @interface graffitiTabBarController ()
 
@@ -20,20 +24,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tabBar setTranslucent:NO];
-    [self.tabBar setBackgroundImage:[self imageFromColor:[UIColor purpleColor] forSize:CGSizeMake(self.view.frame.size.width, 49) withCornerRadius:0]];
+    [self.tabBar setTranslucent:YES];
+    [self.tabBar setBackgroundImage:[self imageFromColor:mainColor forSize:CGSizeMake(self.view.frame.size.width, 49) withCornerRadius:0]];
     [self.tabBar setTintColor:[UIColor whiteColor]];
     
     graffitiMapViewController * map = [[graffitiMapViewController alloc] init];
+    graffitiFeedTableViewController *feed = [[graffitiFeedTableViewController alloc] init];
+    
+    UINavigationController *nCMap = [[UINavigationController alloc] initWithNavigationBarClass:[CRGradientNavigationBar class] toolbarClass:nil];
+    [nCMap.navigationBar setTintColor:activeColor];
+    [nCMap setViewControllers:@[feed]];
+    [nCMap.navigationBar setTranslucent:NO];
+    [nCMap setTitle:@"Graffiti"];
+   // nCMap.navigationBar.barTintColor = mainColor;
+    [[CRGradientNavigationBar appearance] setBarTintGradientColors:@[gradientBrigtherColor, mainColor]];
+    
+    NSDictionary *textAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [UIColor whiteColor],NSForegroundColorAttributeName,
+                                    [UIColor whiteColor],NSBackgroundColorAttributeName,nil];
+    
+    nCMap.navigationBar.titleTextAttributes = textAttributes;
+    
     graffitiCameraViewController * camera = [[graffitiCameraViewController alloc] init];
     graffitiSettingsViewController * settings = [[graffitiSettingsViewController alloc] init];
-    [map.tabBarItem setTitle:NSLocalizedString(@"Discover", nil)];
-    [map.tabBarItem setImage:[UIImage imageNamed:@"compas"]];
+    [nCMap.tabBarItem setTitle:NSLocalizedString(@"Discover", nil)];
+    [nCMap.tabBarItem setImage:[[UIImage imageNamed:@"tabBarIconMap"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [nCMap.tabBarItem setSelectedImage:[[UIImage imageNamed:@"tabBarIconMap"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [camera.tabBarItem setTitle:NSLocalizedString(@"Graffiti", nil)];
+    [camera.tabBarItem setImage:[[UIImage imageNamed:@"tabBarIconSpray"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [camera.tabBarItem setSelectedImage:[[UIImage imageNamed:@"tabBarIconSpray"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [settings.tabBarItem setTitle:NSLocalizedString(@"Settings", nil)];
-    [settings.tabBarItem setImage:[UIImage imageNamed:@"settings"]];
+    [settings.tabBarItem setImage:[[UIImage imageNamed:@"tabBarIconUser"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [settings.tabBarItem setSelectedImage:[[UIImage imageNamed:@"tabBarIconUser"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     
-    [self setViewControllers:@[map, camera, settings]];
+    [self setViewControllers:@[nCMap, camera, settings]];
+    
+    
+#warning To-change
+    [self setSelectedIndex:0];
     
 }
 

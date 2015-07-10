@@ -7,6 +7,7 @@
 //
 
 #import "graffitiMapViewController.h"
+#import "Constants.h"
 
 @interface graffitiMapViewController ()
 
@@ -16,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor:mainBackgroundColor];
     
 }
 

@@ -17,7 +17,13 @@
 		146AA3971AD4B98800171E16 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146AA3961AD4B98800171E16 /* Images.xcassets */; };
 		146AA39A1AD4B98800171E16 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146AA3981AD4B98800171E16 /* LaunchScreen.xib */; };
 		146AA3A61AD4B98800171E16 /* GraffitiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 146AA3A51AD4B98800171E16 /* GraffitiTests.m */; };
-		1699AFDC317EDA9EE813D81C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF972FD4A61B61188785F7A6 /* libPods.a */; };
+		1484ABD41B4CF93F003F51FC /* UIImageView+Draw.m in Sources */ = {isa = PBXBuildFile; fileRef = 1484ABD21B4CF93F003F51FC /* UIImageView+Draw.m */; };
+		1484ABD91B4D8763003F51FC /* graffitiBrushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1484ABD81B4D8763003F51FC /* graffitiBrushViewController.m */; };
+		1484ABDC1B4DD9EB003F51FC /* graffitiLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1484ABDB1B4DD9EB003F51FC /* graffitiLoginViewController.m */; };
+		1484ABE41B4DE7DA003F51FC /* graffitiFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1484ABE31B4DE7DA003F51FC /* graffitiFeedTableViewController.m */; };
+		1484ABE71B4E6BF8003F51FC /* graffitiFeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1484ABE61B4E6BF8003F51FC /* graffitiFeedTableViewCell.m */; };
+		1484ABEA1B4FEB08003F51FC /* graffitiCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1484ABE91B4FEB08003F51FC /* graffitiCommentsViewController.m */; };
+		D9EB45533F211EF0A726B2CF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4800FE44E4B315BFEB9F3462 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +58,21 @@
 		146AA39F1AD4B98800171E16 /* GraffitiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraffitiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		146AA3A41AD4B98800171E16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		146AA3A51AD4B98800171E16 /* GraffitiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraffitiTests.m; sourceTree = "<group>"; };
+		1484ABD21B4CF93F003F51FC /* UIImageView+Draw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Draw.m"; sourceTree = "<group>"; };
+		1484ABD31B4CF93F003F51FC /* UIImageView+Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Draw.h"; sourceTree = "<group>"; };
+		1484ABD61B4D1A42003F51FC /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		1484ABD71B4D8763003F51FC /* graffitiBrushViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graffitiBrushViewController.h; sourceTree = "<group>"; };
+		1484ABD81B4D8763003F51FC /* graffitiBrushViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = graffitiBrushViewController.m; sourceTree = "<group>"; };
+		1484ABDA1B4DD9EB003F51FC /* graffitiLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graffitiLoginViewController.h; sourceTree = "<group>"; };
+		1484ABDB1B4DD9EB003F51FC /* graffitiLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = graffitiLoginViewController.m; sourceTree = "<group>"; };
+		1484ABE21B4DE7DA003F51FC /* graffitiFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graffitiFeedTableViewController.h; sourceTree = "<group>"; };
+		1484ABE31B4DE7DA003F51FC /* graffitiFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = graffitiFeedTableViewController.m; sourceTree = "<group>"; };
+		1484ABE51B4E6BF8003F51FC /* graffitiFeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graffitiFeedTableViewCell.h; sourceTree = "<group>"; };
+		1484ABE61B4E6BF8003F51FC /* graffitiFeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = graffitiFeedTableViewCell.m; sourceTree = "<group>"; };
+		1484ABE81B4FEB08003F51FC /* graffitiCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graffitiCommentsViewController.h; sourceTree = "<group>"; };
+		1484ABE91B4FEB08003F51FC /* graffitiCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = graffitiCommentsViewController.m; sourceTree = "<group>"; };
+		4800FE44E4B315BFEB9F3462 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		62BDB935DCE4C8E218EA5977 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		CF972FD4A61B61188785F7A6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1699AFDC317EDA9EE813D81C /* libPods.a in Frameworks */,
+				D9EB45533F211EF0A726B2CF /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,11 +117,14 @@
 		146AA3881AD4B98800171E16 /* Graffiti */ = {
 			isa = PBXGroup;
 			children = (
+				1484ABD51B4CF94A003F51FC /* UIImageView + Draw */,
+				146AA3961AD4B98800171E16 /* Images.xcassets */,
+				146AA3891AD4B98800171E16 /* Supporting Files */,
+				146AA3981AD4B98800171E16 /* LaunchScreen.xib */,
 				146AA38D1AD4B98800171E16 /* AppDelegate.h */,
 				146AA38E1AD4B98800171E16 /* AppDelegate.m */,
-				146AA3961AD4B98800171E16 /* Images.xcassets */,
-				146AA3981AD4B98800171E16 /* LaunchScreen.xib */,
-				146AA3891AD4B98800171E16 /* Supporting Files */,
+				1484ABDA1B4DD9EB003F51FC /* graffitiLoginViewController.h */,
+				1484ABDB1B4DD9EB003F51FC /* graffitiLoginViewController.m */,
 				140A3A3A1AD4C02500031129 /* graffitiTabBarController.h */,
 				140A3A3B1AD4C02500031129 /* graffitiTabBarController.m */,
 				140A3A401AD4CA2D00031129 /* graffitiMapViewController.h */,
@@ -113,6 +135,14 @@
 				140A3A441AD4CB1400031129 /* graffitiSettingsViewController.m */,
 				14342EF61AD6BD0C00853C7C /* graffitiPaintViewController.h */,
 				14342EF71AD6BD0C00853C7C /* graffitiPaintViewController.m */,
+				1484ABD71B4D8763003F51FC /* graffitiBrushViewController.h */,
+				1484ABD81B4D8763003F51FC /* graffitiBrushViewController.m */,
+				1484ABE21B4DE7DA003F51FC /* graffitiFeedTableViewController.h */,
+				1484ABE31B4DE7DA003F51FC /* graffitiFeedTableViewController.m */,
+				1484ABE51B4E6BF8003F51FC /* graffitiFeedTableViewCell.h */,
+				1484ABE61B4E6BF8003F51FC /* graffitiFeedTableViewCell.m */,
+				1484ABE81B4FEB08003F51FC /* graffitiCommentsViewController.h */,
+				1484ABE91B4FEB08003F51FC /* graffitiCommentsViewController.m */,
 			);
 			path = Graffiti;
 			sourceTree = "<group>";
@@ -120,6 +150,7 @@
 		146AA3891AD4B98800171E16 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1484ABD61B4D1A42003F51FC /* Constants.h */,
 				146AA38A1AD4B98800171E16 /* Info.plist */,
 				146AA38B1AD4B98800171E16 /* main.m */,
 			);
@@ -143,10 +174,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1484ABD51B4CF94A003F51FC /* UIImageView + Draw */ = {
+			isa = PBXGroup;
+			children = (
+				1484ABD21B4CF93F003F51FC /* UIImageView+Draw.m */,
+				1484ABD31B4CF93F003F51FC /* UIImageView+Draw.h */,
+			);
+			name = "UIImageView + Draw";
+			sourceTree = "<group>";
+		};
 		3F38F91377CFC0DEAFA39F95 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CF972FD4A61B61188785F7A6 /* libPods.a */,
+				4800FE44E4B315BFEB9F3462 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -295,12 +335,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1484ABDC1B4DD9EB003F51FC /* graffitiLoginViewController.m in Sources */,
+				1484ABE71B4E6BF8003F51FC /* graffitiFeedTableViewCell.m in Sources */,
 				14342EF81AD6BD0C00853C7C /* graffitiPaintViewController.m in Sources */,
 				140A3A451AD4CB1400031129 /* graffitiSettingsViewController.m in Sources */,
+				1484ABEA1B4FEB08003F51FC /* graffitiCommentsViewController.m in Sources */,
+				1484ABD41B4CF93F003F51FC /* UIImageView+Draw.m in Sources */,
+				1484ABD91B4D8763003F51FC /* graffitiBrushViewController.m in Sources */,
 				146AA38F1AD4B98800171E16 /* AppDelegate.m in Sources */,
 				140A3A3F1AD4C19D00031129 /* graffitiCameraViewController.m in Sources */,
 				140A3A3C1AD4C02500031129 /* graffitiTabBarController.m in Sources */,
 				146AA38C1AD4B98800171E16 /* main.m in Sources */,
+				1484ABE41B4DE7DA003F51FC /* graffitiFeedTableViewController.m in Sources */,
 				140A3A421AD4CA2D00031129 /* graffitiMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

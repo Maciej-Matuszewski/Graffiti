@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface graffitiPaintViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIImageView *myImage;
+
 @property (nonatomic, retain) UIImage *image;
+
+@property (nonatomic, retain) PFGeoPoint *point;
 
 @end

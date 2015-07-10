@@ -10,6 +10,11 @@
 #import "graffitiPaintViewController.h"
 
 #import "PBJVision.h"
+#import "Constants.h"
+
+#import <DBPrivacyHelper/UIViewController+DBPrivacyHelper.h>
+
+#import <Parse/Parse.h>
 
 @interface graffitiCameraViewController () <PBJVisionDelegate>
 
@@ -18,21 +23,37 @@
 @property(nonatomic, retain) IBOutlet UIView *previewView;
 @property(nonatomic, retain) IBOutlet AVCaptureVideoPreviewLayer *previewLayer;
 
+@property(nonatomic, retain) graffitiPaintViewController *paintView;
+
 @end
 
 @implementation graffitiCameraViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:mainBackgroundColor];
     
     [self prepareForButton];
     [self prepareForPhoto];
+    
+    UIButton *changeCameraButton = [[UIButton alloc] init];
+    [changeCameraButton setImage:[UIImage imageNamed:@"cameraRotateButton"] forState:UIControlStateNormal];
+    [changeCameraButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [changeCameraButton setBackgroundColor:mainColor];
+    [changeCameraButton addTarget:self action:@selector(changeCamera) forControlEvents:UIControlEventTouchUpInside];
+    [changeCameraButton.layer setCornerRadius:20];
+    [self.view addSubview:changeCameraButton];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==25)-[change(40)]" options:0 metrics:nil views:@{@"change":changeCameraButton}]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[change(40)]-(==5)-|" options:0 metrics:nil views:@{@"change":changeCameraButton}]];
+    
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [self.tabBarButton setHidden:NO];
     [self.tabBarItem setTitle:@""];
+    PBJVision *vision = [PBJVision sharedInstance];
+    [vision unfreezePreview];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -76,7 +97,7 @@
     [self.tabBarButton setBackgroundColor:[UIColor whiteColor]];
     [self.tabBarButton.layer setCornerRadius:self.tabBarButton.frame.size.width/2];
     [self.tabBarButton setClipsToBounds:YES];
-    [self.tabBarButton.layer setBorderColor:[UIColor purpleColor].CGColor];
+    [self.tabBarButton.layer setBorderColor:mainColor.CGColor];
     [self.tabBarButton.layer setBorderWidth:5];
     CGFloat heightDifference = self.tabBarButton.frame.size.height - self.tabBarController.tabBar.frame.size.height;
     if (heightDifference < 0)
@@ -100,7 +121,7 @@
         
         
         _previewView = [[UIView alloc] initWithFrame:self.view.frame];
-        _previewView.backgroundColor = [UIColor redColor];
+        _previewView.backgroundColor = mainColor;
         [self.view addSubview:_previewView];
         _previewLayer = [[PBJVision sharedInstance] previewLayer];
         _previewLayer.frame = _previewView.bounds;
@@ -118,13 +139,12 @@
         [vision startPreview];
         
     }else{
-        //TO-DO
-        /*[self showPrivacyHelperForType:DBPrivacyTypeCamera controller:^(DBPrivateHelperController *vc) {
+        [self showPrivacyHelperForType:DBPrivacyTypeCamera controller:^(DBPrivateHelperController *vc) {
         } didPresent:^{
         } didDismiss:^{
             if([[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] != NSOrderedAscending)[self showPrivacyHelperForType:DBPrivacyTypeCamera];
         } useDefaultSettingPane:NO];
-        //*/
+        
     }
 }
 
@@ -132,51 +152,156 @@
     [[PBJVision sharedInstance] capturePhoto];
 }
 
+-(void)changeCamera{
+    
+    PBJVision *vision = [PBJVision sharedInstance];
+    
+    if (vision.cameraDevice==PBJCameraDeviceBack)vision.cameraDevice = PBJCameraDeviceFront;
+    else vision.cameraDevice = PBJCameraDeviceBack;
+    
+}
+
 - (void)vision:(PBJVision *)vision capturedPhoto:(NSDictionary *)photoDict error:(NSError *)error{
     
     UIImage *image = [UIImage imageWithData:[photoDict objectForKey:@"PBJVisionPhotoJPEGKey"]];
     
-    graffitiPaintViewController *paintView = [[graffitiPaintViewController alloc] init];
-    [paintView setImage:image];
-    [self presentViewController:paintView animated:YES completion:^{
-        
-    }];
-        
-    /*
-    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] startUpdateLocation];
-    }else{
-        
-        [self showPrivacyHelperForType:DBPrivacyTypeLocation controller:^(DBPrivateHelperController *vc) {
-        } didPresent:^{
-        } didDismiss:^{
-            if([[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] != NSOrderedAscending)[self showPrivacyHelperForType:DBPrivacyTypeLocation];
-        } useDefaultSettingPane:NO];
-        
+    self.paintView = [[graffitiPaintViewController alloc] init];
+    [self.paintView setImage:[self imageByScalingAndCroppingForSize:self.view.frame.size withImage:image]];
+    
+    
+    self.locationManager = [CLLocationManager new];
+    _locationManager.delegate = self;
+    _locationManager.distanceFilter = kCLDistanceFilterNone;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    [self startUpdateLocation];
+    //[self presentViewController:self.paintView animated:NO completion:nil];
+}
+
+
+#pragma mark - location
+
+-(void)startUpdateLocation{
+    
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedAlways) {
+        [_locationManager requestAlwaysAuthorization];
+    } else {
+        [_locationManager startUpdatingLocation];
     }
     
-    UIImage *image = [UIImage imageWithData:[photoDict objectForKey:@"PBJVisionPhotoJPEGKey"]];
-    image = [self squareImageWithImage:image scaledToSize:image.size.height>image.size.width?CGSizeMake(image.size.width, image.size.width):CGSizeMake(image.size.height, image.size.height)];
+}
+
+- (void)stopUpdateLocation{
+    [self.locationManager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray *)locations {
+    CLLocation *location = [locations lastObject];
+    NSLog(@"lat%f - lon%f", location.coordinate.latitude, location.coordinate.longitude);
     
-    NSData* data = UIImageJPEGRepresentation(image, 0.2f);
+    PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
     
-    if ([PFUser currentUser][@"photo"]) {
-        PFObject *photo = [PFObject objectWithClassName:@"Photos"];
-        photo[@"user"] = [PFUser currentUser];
-        photo[@"photo"] = [PFUser currentUser][@"photo"];
-        [photo saveInBackground];
+    [self.paintView setPoint:point];
+    
+    [self.locationManager stopUpdatingLocation];
+    
+    [self presentViewController:self.paintView animated:NO completion:nil];
+}
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager*)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined: {
+            NSLog(@"User still thinking..");
+            [manager requestWhenInUseAuthorization];
+        } break;
+        case kCLAuthorizationStatusDenied: {
+            NSLog(@"User hates you");
+            
+            [self showPrivacyHelperForType:DBPrivacyTypeLocation controller:^(DBPrivateHelperController *vc) {
+            } didPresent:^{
+            } didDismiss:^{
+                if([[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] != NSOrderedAscending)[self showPrivacyHelperForType:DBPrivacyTypeLocation];
+            } useDefaultSettingPane:NO];
+        } break;
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+        case kCLAuthorizationStatusAuthorizedAlways: {
+            [_locationManager startUpdatingLocation]; //Will update location immediately
+        } break;
+        default:
+            break;
+    }
+}
+
+
+- (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize withImage:(UIImage *)image
+{
+    UIImage *sourceImage = image;
+    UIImage *newImage = nil;
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = targetSize.width;
+    CGFloat targetHeight = targetSize.height;
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
+    
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
+    {
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        
+        if (widthFactor > heightFactor)
+        {
+            scaleFactor = widthFactor; // scale to fit height
+        }
+        else
+        {
+            scaleFactor = heightFactor; // scale to fit width
+        }
+        
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        // center the image
+        if (widthFactor > heightFactor)
+        {
+            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
+        }
+        else
+        {
+            if (widthFactor < heightFactor)
+            {
+                thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
+            }
+        }
     }
     
-    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:data];
+    UIGraphicsBeginImageContext(targetSize); // this will crop
     
-    [[PFUser currentUser] setObject:imageFile forKey:@"photo"];
-    [[PFUser currentUser] setObject:[NSDate date] forKey:@"lastActivation"];
-    [[PFUser currentUser] saveInBackground];
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
     
+    [sourceImage drawInRect:thumbnailRect];
     
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
     
-    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] revealVC] setFrontViewController:[[ezOnlineNavigationController alloc] init]];
-     //*/
+    if(newImage == nil)
+    {
+        NSLog(@"could not scale image");
+    }
+    
+    //pop the context to get back to the default
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 

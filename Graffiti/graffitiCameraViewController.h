@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface graffitiCameraViewController : UIViewController
+#import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+
+@interface graffitiCameraViewController : UIViewController<CLLocationManagerDelegate>
+@property (nonatomic, retain) CLLocationManager *locationManager;
 
 @end
